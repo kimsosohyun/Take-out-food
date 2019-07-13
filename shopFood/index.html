@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>KIMSO FOOD</title>
+    <link rel="stylesheet" href="./src/common/reset.css">
+    <!--iconfont 字体图标-->
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_518606_6676bmcalnrhehfr.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1171155_1clotjrwkf5h.css">
+
+     <!--解决点击响应延时 0.3s 问题-->
+    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+    <script>
+      if ('addEventListener' in document)
+        {
+          document.addEventListener('DOMContentLoaded', function() { FastClick.attach(document.body); }, false); } if(!window.Promise) { document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js" '+'>'+'<'+'/'+'script>');
+      }
+    </script>
+    <script>
+      (function(){
+        var html=document.documentElement;
+        var hw=html.getBoundingClientRect().width;//得到屏幕的总宽度,和页面可视区的宽度近似相等。
+        html.style.fontSize=hw/15+"px";//fontSize就是1rem的值,如果css里面没有设定html的font-size，则默认浏览器以1rem=16px来换算。
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
