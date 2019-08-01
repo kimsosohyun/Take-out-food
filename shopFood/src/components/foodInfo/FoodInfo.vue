@@ -66,9 +66,10 @@
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 2;
     .wrap{
       position: absolute;
-      z-index: 1;
+      z-index: 2;
       top: 0;
       width: 100%;
       height: 100%;
@@ -82,7 +83,7 @@
       border-radius: 6/@r;
       top: 156/@r;
       position: absolute;
-      z-index: 2;
+      z-index: 3;
       background: white;
       width: 80%;
       left: 10%;

@@ -1,5 +1,7 @@
-import {GETADRESS,GETFOODTYPES, GETSHOPLISTS,SAVEUSER,
-  DELETEUSER,GETEVALUATE,GETFOOD,GETINFO} from "./action_types"
+import {
+  GETADRESS, GETFOODTYPES, GETSHOPLISTS, SAVEUSER,
+  DELETEUSER, GETEVALUATE, GETFOOD, GETINFO, REMOVECARD,ADDCARD
+} from './action_types'
 import {reqGetAddress,reqGetFoodTypes,reqGetShopLists,reqUserInfo,
   reqLogout,reqFood,reqInfo,reqEvaluate} from "../api"
 
@@ -87,5 +89,12 @@ export default {
     if (result.code===0){
       commit(GETEVALUATE,{data})
     }
+  },
+  addToCard({commit},food){
+    console.log(food)
+    commit(ADDCARD,{food})
+  },
+  removeCard({commit},food){
+    commit(REMOVECARD,{food})
   }
 }

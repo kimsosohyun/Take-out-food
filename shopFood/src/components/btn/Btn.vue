@@ -2,15 +2,15 @@
   <div class="btn">
     <transition name="transform">
       <div v-if="f_item.count" class="show">
-        <button  class="dec" @click.stop="dec(f_item)">
-          <i class="iconfont icon-jian1"></i>
+        <button  class="dec" >
+          <i @click.stop="dec(f_item)" class="iconfont icon-jian1"></i>
         </button>
         <span>{{f_item.count}}</span>
       </div>
     </transition>
 
-    <button class="add" @click.stop="add(f_item)">
-      <i class="iconfont icon-webicon308"></i>
+    <button class="add">
+      <i @click.stop="add(f_item)" class="iconfont icon-webicon308"></i>
     </button>
   </div>
 </template>
@@ -28,6 +28,7 @@
           food.count++;
         } else {
           Vue.set(food,"count",1);
+          this.$store.dispatch("addToCard",food)
           //food.count=1;没有相应的数据绑定功能
           //一个有数据绑定功能的数据下的新定义的子数据需要有数据绑定功能。
           //food有数据绑定，food.count没有。
@@ -36,6 +37,9 @@
       dec(food){
         if (food.count){
           food.count--;
+          if (!food.count) {
+            this.$store.dispatch("removeCard",food)
+          }
         }
       }
     }

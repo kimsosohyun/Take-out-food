@@ -1,5 +1,7 @@
-import {DELETEUSER, GETADRESS, GETFOODTYPES, GETSHOPLISTS,
-  SAVEUSER,GETEVALUATE,GETINFO,GETFOOD} from './action_types'
+import {
+  DELETEUSER, GETADRESS, GETFOODTYPES, GETSHOPLISTS,
+  SAVEUSER, GETEVALUATE, GETINFO, GETFOOD, ADDCARD, REMOVECARD
+} from './action_types'
 
 export default {
   [GETADRESS](state,{latitude,longitude,address}){
@@ -31,5 +33,13 @@ export default {
   [GETEVALUATE](state,{data}){
     state.evaluate =data;
   },
+  [ADDCARD](state,{food}){
+    state.cardArr.push(food);
+  },
+  [REMOVECARD](state,{food}){
+    state.cardArr.splice(state.cardArr.indexOf(food),1)
+  }
+
+
 
 }

@@ -217,9 +217,9 @@
         background: yellow;
         display: block;
         padding: 2/@r;
-        font-size: 10/@r;
+        font-size: 12/@r;
         text-align: center;
-        width: 20/@r;
+        width: 24/@r;
         height: 8/@r;
         font-weight: bold;
         line-height: 8/@r;
@@ -278,7 +278,9 @@
       line-height: 24/@r;
       font-size: 12/@r;
      i{
+       padding-top: 1/@r;
        font-size: 10/@r;
+       float: right;
      }
     }
   }

@@ -11,8 +11,12 @@ export const SAVEUSER="saveuser";
 
 export const DELETEUSER="deleteuser";
 
-export const GETFOOD="getfood"
+export const GETFOOD="getfood";
 
-export const GETINFO="getinfo"
+export const GETINFO="getinfo";
 
-export const GETEVALUATE="getevaluate"
+export const GETEVALUATE="getevaluate";
+
+export const ADDCARD="addcard";
+
+export const REMOVECARD="removecard";

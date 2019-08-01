@@ -15,7 +15,7 @@
 
 
        <div class="main">
-         <div ref="right_items">
+         <div ref="right_items" class="right_items">
            <div class="food_items"  v-for="(item,index) in food" :index="index">
              <strong>{{item.name}}</strong>
              <ul>
@@ -47,23 +47,24 @@
        </div>
 
 
+
        <FoodInfo  :f_item="data_food" ref="food"/>
        <!--这里就是子组件-->
 
-      <div class="submit" >
-      </div>
+      <ShoppingCart :f_item="data_food" />
 
     </div>
 </template>
 
 <script>
   import Btn from  "../../../components/btn/Btn"
+  import ShoppingCart from  "../../../components/shopping_Cart/Shopping_Cart"
   import FoodInfo from  "../../../components/foodInfo/FoodInfo"
   import BScroll from 'better-scroll'
   export default {
     name: 'Food',
     components:{
-      Btn,FoodInfo
+      Btn,FoodInfo,ShoppingCart
     },
     data(){
       return{
@@ -164,6 +165,7 @@
     }
     .left_items{
       width: 100%;
+      padding-bottom: 50/@r;
       li{
         background: rgb(250,250,250);
         padding-top: 5/@r;
@@ -214,6 +216,9 @@
       margin-left: 1%;
       height: 636/@r;
       width: 78%;
+      .right_items{
+        padding-bottom: 50/@r;
+      }
       .food_items{
         strong {
           padding-bottom: 6/@r;

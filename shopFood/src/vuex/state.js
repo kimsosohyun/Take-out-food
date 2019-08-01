@@ -8,4 +8,5 @@ export default {
   food:[],//食物列表
   info:{},//商家信息
   evaluate:[],//评价列表
+  cardArr:[]//购物车列表
 }
