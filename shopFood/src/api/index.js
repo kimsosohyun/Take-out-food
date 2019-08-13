@@ -1,5 +1,5 @@
 import  ajax from "./ajax";
-const  base_url="/api";//加了base_url的ajax请求是通过代理发给后台服务器的。
+const  base_url="/api" ;//加了base_url的ajax请求是通过代理发给后台服务器的。
 //不加是通过mock.js模拟得到返回的数据，直接在前台就可以处理。
 //http://localhost:3000/position/:geohash  geohash这种带占位符的参数是param类型的参数
 //http://localhost:3000/position?geohash=xxx  这种是query类型的参数
