@@ -19,36 +19,38 @@
           </div>
         </div>
 
-        <div class="list" v-if="showList&&count>0">
-            <div class="wrap"  @click="show">
-            </div>
 
-            <div class="l_content">
-              <div class="title" >
-                <span>购物车</span>
-                <a href="javascript:;">清空</a>
+          <div class="list" :class="{gotop:showList&&nowCount}">
+              <div class="wrap"  @click="show">
               </div>
-              <ul>
-                <li v-for="(card,index) in cardArr" :index="index">
-                    <span>{{card.name}}</span>
-                    <strong>￥{{card.price*card.count}}</strong>
-                    <Btn :f_item="card"/>
-                </li>
-              </ul>
-            </div>
-        </div>
+              <div class="l_content">
+                <div class="title">
+                  <span>购物车</span>
+                  <a href="javascript:;" @click="removeAll">清空</a>
+                </div>
+                <div class="list_wrap">
+                  <ul class="list_content">
+                    <li v-for="(card,index) in cardArr" :index="index">
+                      <span>{{card.name}}</span>
+                      <strong>￥{{card.price*card.count}}</strong>
+                      <Btn :f_item="card"/>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+
 
     </div>
 </template>
 
 <script>
   import  Btn from "../btn/Btn";
+  import BScroll from 'better-scroll'
   import {mapState}  from "vuex"
+  import  {MessageBox} from "mint-ui"
   export default {
     name: 'Shopping_Cart',
-    props:{
-      f_item:Object
-    },
     components:{
       Btn
     },
@@ -62,8 +64,19 @@
       show(){
         if (this.count>0) {
           this.showList=!this.showList;
+           if (!this.scroll){ //防止多次添加BScroll而导致事件处理多次的bug(原因:BScroll禁止了原生事件，采用自己派发事件，如果有多个BScroll，一个事件就会调用多次)
+             this.scroll=new BScroll('.list_wrap',{
+               click:true
+             })
+           }else {
+             this.scroll.refresh();
+           }
         }
-
+      },
+      removeAll(){
+        MessageBox.confirm('确定要清空吗？').then(action => {
+          this.$store.dispatch("removeAll");
+        }).catch(()=>{});
       }
     },
     computed:{
@@ -91,6 +104,14 @@
             return "还需￥"+(this.info.minPrice-this.money)
               +"起送"
           }
+        }
+      },
+      nowCount(){
+        if (this.count>0){
+          return true;
+        } else {
+          this.showList=false;//解决因为count为0自动关闭列表，而this.showList并没有赋值为false,下一次在count不为0时，列表自动弹出的bug。
+          return false;
         }
       }
     },
@@ -180,6 +201,9 @@
     background: lightcoral;
   }
 }
+.list{
+  visibility: hidden;
+}
 .wrap {
   position:fixed;
   top: 0;
@@ -189,13 +213,15 @@
   width: 100%;
   height: 100%;
   background: black;
-  opacity: 0.5;
+  opacity: 0;
 }
   .l_content{
     width: 100%;
     background: white;
     position: fixed;
-    bottom: 50/@r;
+    bottom:50/@r;
+    transform: translateY(100%);
+    transition: .3s;
     .title{
       background: #f3f5f7;
       width: 100%;
@@ -217,31 +243,45 @@
         font-size: 14/@r;
       }
     }
-    ul{
+    .list_wrap{
+      overflow: hidden;
+      max-height: 252/@r;
       width: 100%;
-      li:last-child{
-        border: none;
-      }
-      li{
-        position: relative;
-        box-sizing: border-box;
-        height: 42/@r;
-        border-bottom: 1/@r solid #e4e4e4;
-        span{
-          font-size: 16/@r;
-          padding-left: 12/@r;
-          line-height: 42/@r;
+      .list_content{
+        width: 100%;
+        li:last-child {
+          border: none;
         }
-        strong{
-          float: right;
-          line-height: 42/@r;
-          padding-right: 106/@r;
-          font-size: 16/@r;
-          color: red;
-          font-weight: bold;
+        li{
+          position: relative;
+          box-sizing: border-box;
+          height: 42/@r;
+          border-bottom: 1/@r solid #e4e4e4;
+          span {
+            font-size: 16/@r;
+            padding-left: 12/@r;
+            line-height: 42/@r;
+          }
+          strong {
+            float: right;
+            line-height: 42/@r;
+            padding-right: 106/@r;
+            font-size: 16/@r;
+            color: red;
+            font-weight: bold;
+          }
         }
-
       }
     }
   }
+  .gotop{
+    visibility: visible;
+    .wrap{
+      opacity: 0.5;
+    }
+    .l_content{
+      transform: translateY(0%);
+    }
+  }
+
 </style>

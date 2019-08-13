@@ -44,6 +44,22 @@
       height: 14/@r;
     }
   }
+  .evaStar{
+    display: inline-block;
+    li{
+      float: left;
+      width: 14/@r;
+      height: 14/@r;
+    }
+  }
+  .listStar{
+    display: inline-block;
+    li{
+      float: left;
+      width: 10/@r;
+      height: 10/@r;
+    }
+  }
   .on{
     background:url("./img/star_on.png") no-repeat;
     background-size: cover;

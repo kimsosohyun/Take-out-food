@@ -20,7 +20,7 @@
              <strong>{{item.name}}</strong>
              <ul>
                <li v-for="(f_item,index) in item.foods" :index="index" @click="openShow(f_item)">
-                 <img :src="f_item.icon" alt="">
+                 <img v-lazy="f_item.icon" alt="">
                  <div class="f_content">
                    <h3>{{f_item.name}}</h3>
                    <p>{{f_item.description||"暂无描述"}}</p>
@@ -51,7 +51,7 @@
        <FoodInfo  :f_item="data_food" ref="food"/>
        <!--这里就是子组件-->
 
-      <ShoppingCart :f_item="data_food" />
+      <ShoppingCart/>
 
     </div>
 </template>
@@ -74,7 +74,13 @@
       }
     },
     mounted(){
-      this.$store.dispatch("getFood")
+      if (!this.food.length){ //防止返回主页面后又重新进入food页面而导致：重新发请求得到food从而将count清零。
+        this.$store.dispatch("getFood")
+      }
+      else{  //这种情况的调用情景：从其他路由切换回来，这时候food一直是有数据的，数据也没有改变，所以切换回来的时候不会调用watch方法，
+        //需要在mounted的时候重新调用初始化滚动条的函数。
+        this._initScroll();
+      }
        //不要发多次请求，不然methods中的方法会调用多次，特别注意：
       //同一个页面，父子路由<router-view></router-view>显示的时候，父组件发了一次请求，子组件又发一次的情况。
     },
@@ -99,37 +105,8 @@
       }
     },
     watch:{
-      food(){
-        this.$nextTick(()=>{
-           this.left_scroll=new BScroll('.left_wrap',{
-            click:true
-          })
-          this.right_scroll=new BScroll('.main',{
-            click:true,
-            probeType:2
-          })
-
-          this.right_scroll.on("scroll",({x,y})=>{
-            this.scrollY=Math.abs(y);
-          })
-
-
-           if (this.tops.length===0){//tops只收集一次
-             var items=this.$refs.right_items.children;
-             items=Array.prototype.slice.call(items);//类数组转数组
-             items.forEach((item)=>{
-               this.tops.push(item.offsetTop);
-             })
-           }
-
-
-          this.right_scroll.on("scrollEnd",({x,y})=>{ // probeType:2 引起的后果
-            //惯性不会导致"scroll"的y值发生变化，所以最后停手的那一下将不会关联到左侧，probeType:3 又会调用太多次
-            //所以就采用2，然后在"scrollEnd"的时候再更新一次scrollY的值,这样最后一次也会关联到左侧了。
-            this.scrollY=Math.abs(y);
-          })
-
-        })
+      food(){ //在第一次进入此页面时，还没有food的数据，food一有数据就会被监听到，采用这种方式初始化滚动条。
+        this.$nextTick(this._initScroll)
       }
     },
     methods:{
@@ -144,8 +121,36 @@
       //给子组件加特殊属性ref,然后就可以通过this.$refs.得到子组件，自然也就得到了子组件的数据。
         this.$refs.food.showInfo=true;
         this.data_food=f_item;
-      }
+      },
+      _initScroll(){
+          this.left_scroll=new BScroll('.left_wrap',{
+            click:true
+          })
+          this.right_scroll=new BScroll('.main',{
+            click:true,
+            probeType:2
+          })
 
+          this.right_scroll.on("scroll",({x,y})=>{
+            this.scrollY=Math.abs(y);
+          })
+
+
+          if (this.tops.length===0){//tops只收集一次
+            var items=this.$refs.right_items.children;
+            items=Array.prototype.slice.call(items);//类数组转数组
+            items.forEach((item)=>{
+              this.tops.push(item.offsetTop);
+            })
+          }
+
+
+          this.right_scroll.on("scrollEnd",({x,y})=>{ // probeType:2 引起的后果
+            //惯性不会导致"scroll"的y值发生变化，所以最后停手的那一下将不会关联到左侧，probeType:3 又会调用太多次
+            //所以就采用2，然后在"scrollEnd"的时候再更新一次scrollY的值,这样最后一次也会关联到左侧了。
+            this.scrollY=Math.abs(y);
+          })
+      }
     },
   }
 </script>
@@ -214,7 +219,7 @@
       overflow: hidden;
       float: left;
       margin-left: 1%;
-      height: 636/@r;
+      height: 632/@r;
       width: 78%;
       .right_items{
         padding-bottom: 50/@r;

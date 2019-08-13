@@ -1,6 +1,6 @@
 <template>
     <div>
-      <section class="h_back" @click="$router.replace('/main')">
+      <section class="h_back" @click="$router.go(-1)">
         <i class="iconfont icon-jiantou2"></i>
       </section>
 

@@ -2,7 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f43a1a9-1eba-43cf-b625-15f422a7e922" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../shopFood/src/common/imgs/loading.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/components/foodInfo/FoodInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/components/foodInfo/FoodInfo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../shopFood/src/components/shopHeader/ShopHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/components/shopHeader/ShopHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/components/shopList/ShopList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/components/shopList/ShopList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/components/shopping_Cart/Shopping_Cart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/components/shopping_Cart/Shopping_Cart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/components/star/Star.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/components/star/Star.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/pages/order/Order.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/pages/order/Order.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/pages/search/Search.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/pages/search/Search.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/pages/shop/Shop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/pages/shop/Shop.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/pages/shop/evaluate/Evaluate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/pages/shop/evaluate/Evaluate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/pages/shop/food/Food.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/pages/shop/food/Food.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/pages/shop/info/Info.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/pages/shop/info/Info.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/vuex/action_types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/vuex/action_types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/vuex/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/vuex/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/vuex/getters.js" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/vuex/getters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/vuex/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/vuex/mutations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shopFood/src/vuex/state.js" beforeDir="false" afterPath="$PROJECT_DIR$/../shopFood/src/vuex/state.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -16,19 +37,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/www">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+            <state relative-caret-position="450">
+              <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/sms_util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
+            <state relative-caret-position="1900">
               <caret line="76" column="1" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
             </state>
           </provider>
@@ -37,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4300">
-              <caret line="172" column="2" selection-start-line="172" selection-start-column="2" selection-end-line="172" selection-end-column="2" />
+            <state relative-caret-position="242">
+              <caret line="182" column="9" lean-forward="true" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -113,11 +134,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="168" />
-    <option name="y" value="5" />
-    <option name="width" value="1515" />
-    <option name="height" value="1100" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="488" />
+    <option name="y" value="178" />
+    <option name="width" value="1373" />
+    <option name="height" value="809" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -125,7 +146,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,6 +192,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -251,16 +272,20 @@
       <workItem from="1563332699931" duration="857000" />
       <workItem from="1563352774470" duration="606000" />
       <workItem from="1563361085150" duration="248000" />
+      <workItem from="1565236436771" duration="742000" />
+      <workItem from="1565237308141" duration="607000" />
+      <workItem from="1565359883963" duration="756000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45816000" />
+    <option name="totallyTimeSpent" value="47921000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="488" y="178" width="1373" height="809" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13645943" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1895131" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -274,7 +299,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.1691974" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.1762963" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -300,17 +325,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/www">
+    <entry file="file://$PROJECT_DIR$/util/sms_util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4300">
-          <caret line="172" column="2" selection-start-line="172" selection-start-column="2" selection-end-line="172" selection-end-column="2" />
+        <state relative-caret-position="1900">
+          <caret line="76" column="1" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -348,10 +366,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/sms_util.js">
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="76" column="1" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
+        <state relative-caret-position="242">
+          <caret line="182" column="9" lean-forward="true" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
         </state>
       </provider>
     </entry>
