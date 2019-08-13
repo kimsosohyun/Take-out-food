@@ -3,19 +3,21 @@
       <ShopHeader/>
 
       <div class="tab">
-        <router-link class="food" to="/shop/food">
+        <router-link class="food" to="/shop/food" replace>
             <span :class="{on:$route.path==='/shop/food'}">点餐</span>
         </router-link>
-        <router-link class="evaluate" to="/shop/evaluate">
+        <router-link class="evaluate" to="/shop/evaluate" replace>
           <span :class="{on:$route.path==='/shop/evaluate'}">评价</span>
         </router-link>
-        <router-link class="info" to="/shop/info">
+        <router-link class="info" to="/shop/info" replace>
           <span :class="{on:$route.path==='/shop/info'}">商家</span>
         </router-link>
       </div>
 
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
 
-      <router-view></router-view>
     </div>
 </template>
 
@@ -30,9 +32,8 @@
 
     },
     mounted(){
-      this.$store.dispatch("getEvaluate")
-
-      this.$store.dispatch("getInfo")
+      document.documentElement.scrollTop?document.documentElement.scrollTop=0:document.body.scrollTop=0;
+      this.$store.dispatch("getInfo");
     }
   }
 </script>

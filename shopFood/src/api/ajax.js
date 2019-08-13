@@ -8,7 +8,7 @@ export default function ajax (url,data={},method="GET") {
   //所引用的对象是不同的，和[]===[],false同一道理
 
   if (method==="GET"){
-    if (JSON.stringify(data) === "{}"){
+    if (JSON.stringify(data) === "{}"){ //转换为json
       promise=axios.get(url);
     }
     else{

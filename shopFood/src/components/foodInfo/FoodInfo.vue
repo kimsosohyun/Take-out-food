@@ -8,7 +8,7 @@
         </div>
 
         <div class="img">
-          <img :src="f_item.image" alt="">
+          <img v-lazy="f_item.image" alt="">
           <div class="info">
             <p>{{f_item.description||"暂无描述"}}</p>
           </div>

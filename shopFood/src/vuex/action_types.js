@@ -20,3 +20,7 @@ export const GETEVALUATE="getevaluate";
 export const ADDCARD="addcard";
 
 export const REMOVECARD="removecard";
+
+export const REMOVEALL="removeall";
+
+export const SEARCHLIST="searchlist";

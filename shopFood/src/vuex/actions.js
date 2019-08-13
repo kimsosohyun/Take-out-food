@@ -1,9 +1,9 @@
 import {
   GETADRESS, GETFOODTYPES, GETSHOPLISTS, SAVEUSER,
-  DELETEUSER, GETEVALUATE, GETFOOD, GETINFO, REMOVECARD,ADDCARD
+  DELETEUSER, GETEVALUATE, GETFOOD, GETINFO, REMOVECARD,ADDCARD,REMOVEALL,SEARCHLIST
 } from './action_types'
 import {reqGetAddress,reqGetFoodTypes,reqGetShopLists,reqUserInfo,
-  reqLogout,reqFood,reqInfo,reqEvaluate} from "../api"
+  reqLogout,reqFood,reqInfo,reqEvaluate,reqSearchFoodShops} from "../api"
 
 export default {
   async getAddress({commit},{latitude,longitude}){
@@ -96,5 +96,21 @@ export default {
   },
   removeCard({commit},food){
     commit(REMOVECARD,{food})
-  }
+  },
+  removeAll({commit}){
+    commit(REMOVEALL)
+  },
+  async searchList({commit,state},text,callback){
+    var geohash=state.latitude+","+state.longitude;
+    console.log(geohash,text)
+    var response=await reqSearchFoodShops(geohash,text)
+    var result=response.data;
+    console.log(result)
+    if (result.code===0){
+      var data=result.data
+      commit(SEARCHLIST,{data})
+      callback&&callback();
+    }
+  },
+
 }

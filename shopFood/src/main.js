@@ -7,10 +7,13 @@ import store from "./vuex/index"
 import  "./common/reset.css"
 import {Button} from 'mint-ui'
 import "./mock/mockServer.js"
-
+import lazyLoad from "vue-lazyload"
+import loading from "./common/imgs/loading.gif"
+Vue.use(lazyLoad,{
+  loading
+})
 Vue.component(Button.name, Button)
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -18,5 +21,4 @@ new Vue({
   template: '<App/>',
   router,
   store
-
 })

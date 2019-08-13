@@ -1,6 +1,6 @@
 import {
   DELETEUSER, GETADRESS, GETFOODTYPES, GETSHOPLISTS,
-  SAVEUSER, GETEVALUATE, GETINFO, GETFOOD, ADDCARD, REMOVECARD
+  SAVEUSER, GETEVALUATE, GETINFO, GETFOOD, ADDCARD, REMOVECARD,REMOVEALL,SEARCHLIST
 } from './action_types'
 
 export default {
@@ -38,8 +38,14 @@ export default {
   },
   [REMOVECARD](state,{food}){
     state.cardArr.splice(state.cardArr.indexOf(food),1)
+  },
+  [REMOVEALL](state){
+    state.cardArr.forEach((item)=>{
+      item.count=0;//清零每一个的count属性。
+    })
+    state.cardArr=[];
+  },
+  [SEARCHLIST](state,{data}){
+    state.searchList=data;
   }
-
-
-
 }
