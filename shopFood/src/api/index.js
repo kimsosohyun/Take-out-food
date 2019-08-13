@@ -1,5 +1,5 @@
 import  ajax from "./ajax";
-const  base_url="/api" ;//加了base_url的ajax请求是通过代理发给后台服务器的。
+const  base_url="/api";//加了base_url的ajax请求是通过代理发给后台服务器的。
 //不加是通过mock.js模拟得到返回的数据，直接在前台就可以处理。
 //http://localhost:3000/position/:geohash  geohash这种带占位符的参数是param类型的参数
 //http://localhost:3000/position?geohash=xxx  这种是query类型的参数
@@ -11,7 +11,7 @@ export const reqGetFoodTypes=()=>(ajax(base_url+"/index_category"))
 //获取Swiper组件的16个食物类型
 export const reqGetShopLists=(latitude,longitude)=>(ajax(base_url+"/shops",{latitude:latitude,longitude:longitude})) //纬度  经度
 //获取商家列表                                                                             // url?latitude=xxx
-export const reqSearchFoodShops=(geohash,keyword)=>(ajax(base_url+"/shops",{geohash,keyword}))
+export const reqSearchFoodShops=(geohash,keyword)=>(ajax(base_url+"/search_shops",{geohash,keyword}))
 //搜索商家
 export const reqOneCaptcha=()=>(ajax(base_url+"/captcha"))
 //获取一次性人机验证码
