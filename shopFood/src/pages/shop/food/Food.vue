@@ -61,6 +61,7 @@
   import ShoppingCart from  "../../../components/shopping_Cart/Shopping_Cart"
   import FoodInfo from  "../../../components/foodInfo/FoodInfo"
   import BScroll from 'better-scroll'
+  import {mapState} from "vuex"
   export default {
     name: 'Food',
     components:{
@@ -85,6 +86,7 @@
       //同一个页面，父子路由<router-view></router-view>显示的时候，父组件发了一次请求，子组件又发一次的情况。
     },
     computed:{
+     //...mapState({food:"food"}),
       food(){
         return this.$store.state.food
       },

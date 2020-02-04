@@ -34,7 +34,7 @@
 
       <div class="pass" v-if="!on">
         <form>
-          <input type="text" placeholder="手机/邮箱/用户名" v-model="name">
+          <input type="text" maxlength="11" placeholder="手机/邮箱/用户名" v-model="name">
 
           <div class="p_btn">
               <input id="checkbox" type="checkbox" v-model="showPwd">
@@ -152,7 +152,7 @@
             this.toast("手机或验证码不符")
            }
            else{
-            this.$store.dispatch("saveUser",{user})
+            this.$store.dispatch("saveUser",{user}) //登陆完毕，保存user信息，以备后面组件直接从vuex中取来使用。
             console.log(user)
             this.$router.replace("/personal")
           }

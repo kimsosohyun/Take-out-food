@@ -90,26 +90,30 @@ export default {
       commit(GETEVALUATE,{data})
     }
   },
-  addToCard({commit},food){
-    console.log(food)
-    commit(ADDCARD,{food})
+  addToCard({commit},foodInfo){
+    commit(ADDCARD,{foodInfo})
   },
-  removeCard({commit},food){
-    commit(REMOVECARD,{food})
+  removeCard({commit},foodInfo){
+    commit(REMOVECARD,{foodInfo})
   },
-  removeAll({commit}){
-    commit(REMOVEALL)
+  removeAll({commit},id){
+    commit(REMOVEALL,{id})
   },
-  async searchList({commit,state},text,callback){
+  async searchList({commit,state},sendData){
+    var {callback,text}=sendData;
     var geohash=state.latitude+","+state.longitude;
-    console.log(geohash,text)
+    console.log(geohash)
     var response=await reqSearchFoodShops(geohash,text)
     var result=response.data;
     console.log(result)
     if (result.code===0){
       var data=result.data
       commit(SEARCHLIST,{data})
+      // console.log(callback,text)
       callback&&callback();
+    }
+    else{
+      console.log(222)
     }
   },
 

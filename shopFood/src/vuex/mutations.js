@@ -33,17 +33,46 @@ export default {
   [GETEVALUATE](state,{data}){
     state.evaluate =data;
   },
-  [ADDCARD](state,{food}){
-    state.cardArr.push(food);
-  },
-  [REMOVECARD](state,{food}){
-    state.cardArr.splice(state.cardArr.indexOf(food),1)
-  },
-  [REMOVEALL](state){
-    state.cardArr.forEach((item)=>{
-      item.count=0;//清零每一个的count属性。
+  [ADDCARD](state,{foodInfo}){
+    var  {cardArr}=state;
+    var id=foodInfo[0];
+    var data=foodInfo[1];
+    var thisIndex=-1;
+    cardArr.forEach((item,index)=>{
+      if(item[id]){
+          console.log("有了");
+          thisIndex=index;
+        }
     })
-    state.cardArr=[];
+    if (thisIndex!==-1){
+      cardArr[thisIndex][id].push(data);
+    } else{
+      cardArr.push({[id]:[data]})
+    }
+  },
+  [REMOVECARD](state,{foodInfo}){
+   //   state.cardArr.splice(state.cardArr.indexOf(food),1)
+    var  {cardArr}=state;
+    var id=foodInfo[0];
+    var data=foodInfo[1];
+    cardArr.forEach((item)=>{
+      if(item[id]){
+        item[id].splice(item[id].indexOf(data),1)
+      }
+    })
+  },
+  [REMOVEALL](state,{id}){
+    var thisIndex;
+    state.cardArr.forEach((item,index)=>{
+      if (item[id]){
+        thisIndex=index;
+        item[id].forEach((i)=>{
+          i.count=0;
+        })
+        item[id].count=0;//清零每一个的count属性。
+      }
+    })
+    state.cardArr.splice(thisIndex,1)
   },
   [SEARCHLIST](state,{data}){
     state.searchList=data;

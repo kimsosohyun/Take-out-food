@@ -30,8 +30,8 @@
   left: 0;
   right: 0;
   bottom:0;
-  background:#aaa;
-  opacity: 0.6;
+  background:black;
+  opacity: 0.5;
   z-index: 1;
 }
   .inner{

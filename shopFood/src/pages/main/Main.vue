@@ -6,7 +6,7 @@
       </router-link>
 
 
-      <router-link  :to="!user._id?'/login':'/userInfor'" class="h_login" slot="right">
+      <router-link  :to="!user._id?'/login':'/userInfo'" class="h_login" slot="right">
           <span v-if="!user._id" >登陆|注册</span>
           <i v-else class="iconfont icon-denglu"></i>
       </router-link>

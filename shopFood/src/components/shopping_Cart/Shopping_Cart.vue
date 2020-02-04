@@ -14,7 +14,7 @@
               <p>另需配送费{{info.deliveryPrice}}元</p>
             </div>
           </div>
-          <div class="right" :class="{overMin:money>info.minPrice}">
+          <div @click="goPay"  class="right" :class="{overMin:money>info.minPrice}">
               <span>{{content}}</span>
           </div>
         </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="list_wrap">
                   <ul class="list_content">
-                    <li v-for="(card,index) in cardArr" :index="index">
+                    <li v-for="(card,index) in thisCard" :index="index">
                       <span>{{card.name}}</span>
                       <strong>￥{{card.price*card.count}}</strong>
                       <Btn :f_item="card"/>
@@ -56,8 +56,9 @@
     },
     data(){
       return {
+        id:this.$route.query.id,
         showList:false,
-        overMin:false
+        overMin:false,
       }
     },
     methods:{
@@ -75,19 +76,35 @@
       },
       removeAll(){
         MessageBox.confirm('确定要清空吗？').then(action => {
-          this.$store.dispatch("removeAll");
+          this.$store.dispatch("removeAll",this.id);
         }).catch(()=>{});
+      },
+      goPay(){
+        if (this.money>=this.info.minPrice) {
+          this.$router.push("/pay?id="+this.id)
+        }
       }
+
     },
     computed:{
       ...mapState(["cardArr","info"]),
+      thisCard(){
+        var card=[];
+       this.cardArr.forEach((item)=>{
+          if (item[this.id]){
+            card=item[this.id];
+          }
+        })
+        return card;
+
+      },
       count(){
-        return this.cardArr.reduce((total,num)=>{
+        return this.thisCard.reduce((total,num)=>{
           return total+num.count
         },0)
       },
       money(){
-        return this.cardArr.reduce((total,num)=>{
+        return this.thisCard.reduce((total,num)=>{
           return total+num.count*num.price
         },0)
       },

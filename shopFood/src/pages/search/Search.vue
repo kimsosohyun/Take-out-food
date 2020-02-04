@@ -13,8 +13,12 @@
     </div>
     <ul class="lists" v-if="searchList.length">
       <router-link tag="li"  v-for="(shop,index) in searchList" :key="index"  :to="{path:'/shop', query:{id:shop.id}}">
-        <!--另外几种写法：1.:to="'/shop?id='+shop.id"  2.:to="`/shop?id=${shop.id}`"  3.:to="{path:'/shop', query:{id:shop.id}}"-->
-         <!--4.:to="'/shop?id='+shop.id+''"-->
+        <!--另外query几种写法：1.:to="'/shop?id='+shop.id"  2.:to="`/shop?id=${shop.id}`"
+        3.:to="{path:'/shop', query:{id:shop.id}}"-->
+        <!--对于params来讲   :to="{path:'/shop', params:{id:shop.id}} 这种形式是不可取的，path已经被固定不能再加上params的参数了"
+        写法：:to="'/shop/food/'+shop.id"    :to="{name:'Food', params:{id:shop.id}}  :to="`/shop/food/id=${shop.id}`"
+        -->
+
         <img :src="shop.image_path" alt="">
         <div class="shop_left">
           <h3>{{shop.name}}</h3>
@@ -54,10 +58,14 @@
           return
         }
         else{
-          this.$store.dispatch("searchList",text,()=>{
-            this.startSearch=true;
-          })
-
+          var data={  // this.$store.dispatch() 只能传两个参数！第二个参数为要带的数据
+            text:text,
+            callback:()=>{
+              console.log("a")
+              this.startSearch=true;
+            }
+          }
+          this.$store.dispatch("searchList",data)
         }
       }
     },

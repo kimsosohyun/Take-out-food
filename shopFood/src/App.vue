@@ -31,10 +31,27 @@ export default {
       // {
       //   timeout:1000
       // })
-
-    var longitude=114.3701,latitude=30.5077;
-    this.$store.dispatch("getAddress",{latitude,longitude})
-    this.$store.dispatch("autoLogin")
+    var that=this;
+    window.init = function() {
+      AMap.plugin('AMap.CitySearch', function () {
+        var citySearch = new AMap.CitySearch()
+        citySearch.getLocalCity(function (status, result) {
+          if (status === 'complete' && result.info === 'OK') {
+            var  data=result.rectangle.split(";")
+            var longitude=Number(data[0].split(",")[0]),latitude=Number(data[0].split(",")[1]);
+            console.log(longitude,latitude)
+            that.$store.dispatch("getAddress",{latitude,longitude})
+            that.$store.dispatch("autoLogin")
+          }
+          else {
+            alert("定位失败，将采用默认地址进行商家搜索");
+            var longitude=114.3701,latitude=30.5077;
+            that.$store.dispatch("getAddress",{latitude,longitude})
+            that.$store.dispatch("autoLogin")
+          }
+        })
+      })
+    }
   },
   // mounted(){
   //  console.log(Boolean(this.$route.meta.showFooter)===false)

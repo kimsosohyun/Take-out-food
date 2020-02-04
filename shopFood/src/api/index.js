@@ -1,5 +1,6 @@
 import  ajax from "./ajax";
-const  base_url="/api";//加了base_url的ajax请求是通过代理发给后台服务器的。
+//const base_url="/api";//加了base_url的ajax请求是通过代理发给后台服务器的。   /api开发环境代理
+const base_url="http://192.168.1.12:4000";   //这个是打包环境代理
 //不加是通过mock.js模拟得到返回的数据，直接在前台就可以处理。
 //http://localhost:3000/position/:geohash  geohash这种带占位符的参数是param类型的参数
 //http://localhost:3000/position?geohash=xxx  这种是query类型的参数
@@ -27,11 +28,14 @@ export const reqLogout=()=>(ajax(base_url+"/logout"))
 //用户登出
 
 export const reqFood=()=>(ajax("/shop/food"))
-//mock 食物列表
+//mock 食物列表   根据id获取商户的有关信息！
 export const reqInfo=()=>(ajax("/shop/info"))
 //mock 商家信息
 export const reqEvaluate=()=>(ajax("/shop/evaluate"))
 //mock 用户评价
+
+
+
 
 
 

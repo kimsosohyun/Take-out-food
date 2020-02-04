@@ -9,5 +9,5 @@ export default {
   info:{},//商家信息
   evaluate:[],//评价列表
   cardArr:[],//购物车列表
-  searchList:[]//搜索商家列表
+  searchList:[], //搜索商家列表
 }

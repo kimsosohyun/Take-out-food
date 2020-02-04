@@ -1,7 +1,7 @@
 <template>
     <div>
       <ul class="shopLists" v-if="shopLists.length">
-        <li v-for="(shop,index) in shopLists" :key="index"  @click="$router.push('/shop')"  >
+        <li v-for="(shop,index) in shopLists" :key="index"  @click="$router.push('/shop?id='+shop.id)"  >
           <img v-lazy="shop.image_path" alt="">
           <div class="shop_left">
             <div class="brand">品牌</div>

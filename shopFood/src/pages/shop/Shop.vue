@@ -1,12 +1,12 @@
 <template>
     <div>
-      <ShopHeader/>
-
+      <ShopHeader />
       <div class="tab">
-        <router-link class="food" to="/shop/food" replace>
+        <!--<router-link class="food" :to="{name:'Food',params:{id}}" replace>-->
+        <router-link class="food" :to="'/shop/food?id='+id" replace>
             <span :class="{on:$route.path==='/shop/food'}">点餐</span>
         </router-link>
-        <router-link class="evaluate" to="/shop/evaluate" replace>
+        <router-link class="evaluate" :to="'/shop/evaluate?id='+id" replace>
           <span :class="{on:$route.path==='/shop/evaluate'}">评价</span>
         </router-link>
         <router-link class="info" to="/shop/info" replace>
@@ -25,6 +25,11 @@
   import  ShopHeader from "../../components/shopHeader/ShopHeader"
   export default {
     name: 'Shop',
+    data(){
+      return {
+        id:this.$route.query.id
+      }
+    },
     components:{
       ShopHeader
     },
@@ -32,6 +37,7 @@
 
     },
     mounted(){
+      console.log(Boolean(this.$route.meta.noShowHeader))
       document.documentElement.scrollTop?document.documentElement.scrollTop=0:document.body.scrollTop=0;
       this.$store.dispatch("getInfo");
     }

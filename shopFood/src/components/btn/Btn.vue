@@ -19,6 +19,11 @@
   import Vue from  "vue";
   export default {
     name: 'Btn',
+    data(){
+      return {
+        id:this.$route.query.id
+      }
+    },
     props:{
       f_item:Object
     },
@@ -28,7 +33,8 @@
           food.count++;
         } else {
           Vue.set(food,"count",1);
-          this.$store.dispatch("addToCard",food)
+          var foodInfo=[this.id,food];
+          this.$store.dispatch("addToCard",foodInfo)
           //food.count=1;没有相应的数据绑定功能
           //一个有数据绑定功能的数据下的新定义的子数据需要有数据绑定功能。
           //food有数据绑定，food.count没有。
@@ -38,7 +44,8 @@
         if (food.count){
           food.count--;
           if (!food.count) {
-            this.$store.dispatch("removeCard",food)
+            var foodInfo=[this.id,food];
+            this.$store.dispatch("removeCard",foodInfo)
           }
         }
       }

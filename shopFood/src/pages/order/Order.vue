@@ -26,7 +26,10 @@
       Header
     },
     computed:{
-      ...mapState(["user"])
+      user(){
+        return this.$store.state.user
+      }  //也有这种复杂的写法。
+       //...mapState(["user"])
     }
   }
 </script>
