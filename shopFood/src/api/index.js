@@ -1,6 +1,6 @@
 import  ajax from "./ajax";
-//const base_url="/api";//加了base_url的ajax请求是通过代理发给后台服务器的。   /api开发环境代理
-const base_url="http://192.168.1.12:4000";   //这个是打包环境代理
+const base_url="/api";//加了base_url的ajax请求是通过代理发给后台服务器的。   /api开发环境代理
+//const base_url="http://192.168.1.12:4000";   //这个是打包环境代理
 //不加是通过mock.js模拟得到返回的数据，直接在前台就可以处理。
 //http://localhost:3000/position/:geohash  geohash这种带占位符的参数是param类型的参数
 //http://localhost:3000/position?geohash=xxx  这种是query类型的参数
@@ -11,6 +11,7 @@ export const reqGetAddress=(geohash)=>(ajax(base_url+"/position/"+geohash+"")) /
 export const reqGetFoodTypes=()=>(ajax(base_url+"/index_category"))
 //获取Swiper组件的16个食物类型
 export const reqGetShopLists=(latitude,longitude)=>(ajax(base_url+"/shops",{latitude:latitude,longitude:longitude})) //纬度  经度
+//export const reqGetShopLists=(latitude,longitude)=>(ajax("http://49.235.42.82:4001/pub/findAllStore"))
 //获取商家列表                                                                             // url?latitude=xxx
 export const reqSearchFoodShops=(geohash,keyword)=>(ajax(base_url+"/search_shops",{geohash,keyword}))
 //搜索商家
@@ -28,6 +29,8 @@ export const reqLogout=()=>(ajax(base_url+"/logout"))
 //用户登出
 
 export const reqFood=()=>(ajax("/shop/food"))
+//ickck.cn:4001/pub/findCommandByStoreId?storeId=1
+//ickck.cn:4001/pub/findAllStore
 //mock 食物列表   根据id获取商户的有关信息！
 export const reqInfo=()=>(ajax("/shop/info"))
 //mock 商家信息

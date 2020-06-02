@@ -22,8 +22,12 @@ export default {
   async getFoodTypes({commit}){
     var response=await reqGetFoodTypes()
     var result=response.data;
-    var foodTypes=result.data;
-    commit(GETFOODTYPES,{foodTypes})
+    if (result.code===0){
+      var foodTypes=result.data;
+      commit(GETFOODTYPES,{foodTypes})
+    }else{
+      console.log(result.error)
+    }
   },
 
   async getShopLists({commit,state}){
@@ -116,5 +120,11 @@ export default {
       console.log(222)
     }
   },
-
+  update_userInfo({commit},data){
+    commit("update_userInfo",{data})
+  },
+  remove_address({commit},data){
+    console.log(data)
+    commit("remove_address",{data})
+  }
 }

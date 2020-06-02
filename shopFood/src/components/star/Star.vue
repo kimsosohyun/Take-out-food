@@ -14,6 +14,7 @@
       star:String  //星星的class名，通过星星所用地方来决定星星的大小样式。
     },
     computed: {
+
       starArr () {
         var arr = [];
         var score = this.score;
@@ -54,6 +55,16 @@
   }
   .listStar{
     display: inline-block;
+    li{
+      float: left;
+      width: 10/@r;
+      height: 10/@r;
+    }
+  }
+  .sortStar{
+    display: inline-block;
+    margin-top: 33/@r;
+    margin-left: 34/@r;
     li{
       float: left;
       width: 10/@r;

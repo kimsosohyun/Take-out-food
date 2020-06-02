@@ -5,7 +5,7 @@
       </div>
 
       <div class="l_title">
-        kim外卖
+        想点外卖
       </div>
 
 
@@ -63,7 +63,7 @@
 <script>
 
   import Toast from "../../components/toast/Toast"
-  import {reqPhoneLogin,reqPwdLogin,reqPhoneCode} from  "../../api/index"
+  import {reqPhoneLogin,reqPwdLogin,reqPhoneCode,reqLogin} from  "../../api/index"
   export default {
     name: 'Login',
     data(){
@@ -194,7 +194,7 @@
       },
       getNew(){//点击通过不同的query参数（时间戳）更新验证码captcha
         this.$refs.captcha.src="http://localhost:4000/captcha?"+Date.now()+"";
-      }
+      },
     }
   }
 </script>

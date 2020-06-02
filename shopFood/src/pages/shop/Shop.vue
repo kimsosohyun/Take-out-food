@@ -9,7 +9,7 @@
         <router-link class="evaluate" :to="'/shop/evaluate?id='+id" replace>
           <span :class="{on:$route.path==='/shop/evaluate'}">评价</span>
         </router-link>
-        <router-link class="info" to="/shop/info" replace>
+        <router-link class="info" :to="'/shop/info?id='+id" replace>
           <span :class="{on:$route.path==='/shop/info'}">商家</span>
         </router-link>
       </div>

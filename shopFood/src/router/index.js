@@ -22,6 +22,8 @@ const Personal=()=>import('../pages/personal/Personal'); //相比上面的引入
 import Balance from '../pages/personal/Balance/Balance'
 import Envelopes from '../pages/personal/Envelopes/Envelopes'
 import Integral from '../pages/personal/Integral/Integral'
+import Service  from "../pages/service/Service"
+import Sort  from "../pages/sort/Sort"
 export default new Router({
   routes: [
     {
@@ -109,6 +111,15 @@ export default new Router({
     {
       path:"/userInfo",
       component:UserInfo
+    },
+    {
+      path:"/service",
+      component:Service
+    },
+    {
+      path:"/sort/:type",
+      component:Sort
+
     }
   ]
 })

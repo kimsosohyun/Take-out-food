@@ -19,10 +19,28 @@ export default {
     state.shopLists =shopLists
   },
   [SAVEUSER](state,{user}){
-    state.user =user
+    if (user.name) {
+      state.user.name=user.name;
+    }
+    else{
+      state.user.phone=user.phone;
+    }
+    state.user._id =user._id;
+
+    if(sessionStorage.getItem("user")){
+         state.user=JSON.parse(sessionStorage.getItem("user"));
+    }
   },
   [DELETEUSER](state){
-    state.user ={};
+    state.user = {
+      _id: "",
+      name: "",
+      phone: "",
+      address: [],
+      avatar: "",
+      content: []
+    }
+    sessionStorage.removeItem("user")
   },
   [GETFOOD](state,{data}){
     state.food =data;
@@ -76,5 +94,24 @@ export default {
   },
   [SEARCHLIST](state,{data}){
     state.searchList=data;
+  },
+  ["update_userInfo"](state,{data}){
+    var {result,to}=data;
+    if (to==="address"||to==="content"){
+      //if (state.user.address.length===0){
+        //Boolean("")->false   Boolean([]),Boolean({})->true
+        state.user[to].push(result);
+     // } else{
+      //  state.user.address.push(result);
+     // }
+    }
+    else{
+      state.user[to]=result;
+    }
+    sessionStorage.setItem("user", JSON.stringify(state.user))
+  },
+  ["remove_address"](state,{data}){
+    state.user.address.splice(data,1);
+    sessionStorage.setItem("user", JSON.stringify(state.user))
   }
 }

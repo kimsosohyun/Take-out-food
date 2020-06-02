@@ -16,9 +16,9 @@
 
     <div class="swiper-container" v-if="types.length">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(inlineArr,index) in foodTypes" :key="index">
+        <div class="swiper-slide" v-for="(inlineArr,index1) in foodTypes" :key="index1">
           <ul>
-            <li v-for="(data,index) in inlineArr" :key="index">
+            <li v-for="(data,index2) in inlineArr" :key="index2" @click="to_sort(index2,index1)">
               <img :src="imgUrl+data.image_url" alt="">
               <span>{{data.title}}</span>
             </li>
@@ -105,6 +105,11 @@
       }
     },
     methods:{
+      to_sort(index2,index1){
+        var type=index1*8+index2;
+        this.$router.push("/sort/"+type);
+      }
+
     },
     watch:{
       foodTypes (value) {//监视数据的变化，在监视的数据发生变化调用

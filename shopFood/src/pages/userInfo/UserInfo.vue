@@ -12,21 +12,21 @@
           <li @click="open_a">
             <span>头像</span>
             <div class="r">
-              <img src="//p1.meituan.net/codeman/e32b47a07b818bf9a1d4086a882c18a62282.png" alt="">
+              <img :src="avatar_url"   alt="">
               <i class="iconfont icon-jiantou1"></i>
             </div>
           </li>
           <li @click="open_n">
             <span>用户名</span>
             <div class="r">
-               <p>kim</p>
+               <p>{{user.name?user.name:"未知"}}</p>
               <i class="iconfont icon-jiantou1"></i>
             </div>
           </li>
           <li @click="open_p">
             <span>手机号</span>
             <div class="r">
-              <p>15527686825</p>
+              <p>{{user.phone?user.phone:"未知"}}</p>
               <i class="iconfont icon-jiantou1"></i>
             </div>
           </li>
@@ -44,7 +44,12 @@
           v-model="show_a"
           position="bottom">
           <ul class="pop_a">
-            <li>从手机相册中选择</li>
+            <li>
+              <label class="input_file">
+                <input type="file"  @change="avatar_choose"/>
+                <span>上传图片</span>
+              </label>
+            </li>
             <li @click="close_a">取消</li>
           </ul>
         </mt-popup>
@@ -54,9 +59,9 @@
         <Toast_r :show="show_n" :close="close_n" title="用户名">
           <section slot="main" class="pop_n">
             <div class="input">
-              <input type="text" placeholder="用户名" maxlength="11">
+              <input type="text" v-model="name" placeholder="用户名" maxlength="11">
             </div>
-            <div class="ok">
+            <div class="ok" @click="update_name">
              <button>确认修改</button>
             </div>
           </section>
@@ -67,9 +72,9 @@
         <Toast_r :show="show_p" :close="close_p" title="电话号码">
           <section slot="main" class="pop_p">
             <div class="input">
-              <input type="text" placeholder="电话号码" maxlength="11">
+              <input type="text" placeholder="电话号码" maxlength="11" v-model="phone">
             </div>
-            <div class="ok">
+            <div class="ok" @click="update_phone">
               <button>确认修改</button>
             </div>
           </section>
@@ -80,23 +85,23 @@
         <Toast_r :show="show_r" :close="close_r" title="地址编辑">
           <section slot="main" class="pop_r">
             <ul>
-              <li @click="close_delete">
+              <li v-for="(item,index) in user.address" @click="close_delete" :key="index">
                 <div class="top">
-                  <p>光谷中南民族大学北区</p>
-                  <span>2bxxx</span>
+                  <p>{{item.adr}}</p>
+
                 </div>
 
                 <div class="bottom">
-                  <span>杜拉拉</span>
-                  <p>15527686825</p>
+                  <span>{{item.name}}</span>
+                  <p>{{item.phone}}</p>
                 </div>
 
-                <div class="right" @click.stop="delete_show">
+                <div class="right" @click.stop="delete_show(index)">
                   <i  class="iconfont icon-bianji"></i>
                 </div>
 
-                <div class="delete" @click.stop="start_delete"
-                :class="{delete_active:delete_d}">
+                <div class="delete" @click.stop="start_delete(index)"
+                :class="{delete_active:index===delete_num}">
                   <span>删除</span>
                 </div>
               </li>
@@ -119,18 +124,18 @@
             <ul>
               <li>
                 <span>联系人</span>
-                <input type="text" placeholder="姓名">
+                <input type="text" placeholder="姓名" v-model="address.name">
               </li>
               <li>
                 <span>电话</span>
-                <input type="text" placeholder="手机号码">
+                <input type="text" placeholder="手机号码" maxlength="11" v-model="address.phone">
               </li>
               <li>
                 <span>地址</span>
-                <input type="text" placeholder="收货地址">
+                <input type="text" placeholder="收货地址" v-model="address.adr">
               </li>
             </ul>
-            <div class="ok">
+            <div class="ok" @click="add_adr">
               <button>确认</button>
             </div>
           </section>
@@ -143,6 +148,7 @@
 <script>
   import Header from "../../components/header/Header"
   import Toast_r from  "../../components/toast/Toast1"
+  import  {mapState} from  "vuex"
   export default {
     name: 'UserInfo',
     components:{
@@ -155,8 +161,15 @@
         show_p:false,
         show_r:false,
         show_ad:false,
-        delete_d:false
-
+        delete_num:-1,
+        update_avatar:false,
+        name:"",
+        phone:"",
+        address:{
+          name:"",
+          phone:"",
+          adr:""
+        }
       }
     },
     methods:{
@@ -184,14 +197,15 @@
       open_r(){
         this.show_r=true;
       },
-      delete_show(){
-        this.delete_d=true;
+      delete_show(index){
+        this.delete_num=index;
       },
       close_delete(){
-        this.delete_d=false;
+        this.delete_num=-1;
       },
-      start_delete(){
-
+      start_delete(index){
+        this.$store.dispatch("remove_address",index);
+        this.delete_num=-1;
       },
       close_ad(){
         this.show_ad=false;
@@ -199,6 +213,64 @@
       open_ad(){
         this.show_ad=true;
       },
+      avatar_choose(el) {
+        var file = el.target.files[0];
+        if (file.type.indexOf("image") !== -1) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);//发起异步请求
+          var that=this;
+          reader.onload = function () {
+            var data={
+              to:"avatar",
+              result:this.result
+            }
+            that.$store.dispatch("update_userInfo",data)
+            that.show_a=false;
+          }
+        }
+      },
+      update_name(){
+        var data={
+          to:"name",
+          result:this.name
+        }
+        this.$store.dispatch("update_userInfo",data);
+        this.show_n=false;
+        this.name="";
+
+      },
+      update_phone(){
+        var data={
+          to:"phone",
+          result:this.phone
+        }
+        this.$store.dispatch("update_userInfo",data);
+        this.show_p=false;
+        this.phone="";
+      },
+      add_adr(){
+        var data={
+          to:"address",
+          result:this.address
+        }
+        this.$store.dispatch("update_userInfo",data);
+        this.show_ad=false;
+        this.address={
+          name:"",
+          phone:"",
+          adr:""
+        }
+      }
+    },
+    computed:{
+      ...mapState(["user"]),
+      avatar_url(){
+        if (this.user.avatar){
+          return this.user.avatar;
+        } else{
+          return "//p1.meituan.net/codeman/e32b47a07b818bf9a1d4086a882c18a62282.png"
+        }
+      }
     }
   }
 </script>
@@ -281,12 +353,11 @@
       margin: 20/@r 0;
       width: 100%;
       height: 40/@r;
-      background: red;
+      text-align: center;
       input{
-        width: 100%;
+        width: 98%;
         height: 40/@r;
-        border-top: 0.04rem solid #e4e4e4;
-        border-bottom: 0.04rem solid #e4e4e4;
+        border: 0.04rem solid #e4e4e4;
         box-sizing: border-box;
         font-size: 16/@r;
         line-height: 40/@r;
@@ -321,16 +392,18 @@
             font-size: 16/@r;
             font-weight: bold;
             padding-top: 10/@r;
-          }
-          span{
-            font-size: 16/@r;
-            line-height: 32/@r;
+            line-height: 30/@r;
+            width: 80%;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
           }
         }
         .bottom{
-         font-size: 14/@r;
+          font-size: 14/@r;
           color: #999;
           p{
+            line-height: 30/@r;
             display: inline;
           }
         }
@@ -429,6 +502,19 @@
       background: lightcoral;
       border-radius: 8/@r;
       color: white;
+    }
+  }
+
+  .input_file{
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    input{
+      display: none;
+    }
+    span{
+      font-size: 16/@r;
+      line-height: 40/@r;
     }
   }
 

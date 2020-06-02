@@ -8,9 +8,11 @@
 
       <div class="main">
         <ul class="payInfo">
-          <li><a href="javascript:;">
-            <i class="iconfont icon-jia"></i>
-            选择收货地址</a>
+          <li @click="show_a">
+            <a  href="javascript:;">
+              <i class="iconfont icon-jia"></i>
+              <p :class="{p_active:c_adr}">{{c_adr?c_adr:"选择收货地址"}}</p>
+            </a>
           </li>
 
           <li>
@@ -97,6 +99,63 @@
         </Toast_r>
       </div>
 
+      <div class="pop_address">
+        <Toast_r :show="show_address" :close="close_a" title="地址选择">
+          <section slot="main" class="pop_r">
+            <ul>
+              <li v-for="(item,index) in user.address" @click="choose_a(item.adr,index)"  :key="index">
+                <div class="top">
+                  <p>{{item.adr}}</p>
+
+                </div>
+
+                <div class="bottom">
+                  <span>{{item.name}}</span>
+                  <p>{{item.phone}}</p>
+                </div>
+
+                <div class="right">
+                  <i v-if="index!==choose_index" class="iconfont icon-xuanzhongyuandian"></i>
+                  <i v-else class="iconfont icon-xuanzhong"></i>
+                </div>
+              </li>
+            </ul>
+
+            <div class="add" @click="open_ad">
+              <span>新添</span>
+              <div class="r">
+                <i class="iconfont icon-jiantou1"></i>
+              </div>
+            </div>
+          </section>
+        </Toast_r>
+      </div>
+
+
+      <div class="add_address">
+        <Toast_r :show="show_ad" :close="close_ad" title="新增地址">
+          <section slot="main" class="pop_ad">
+            <ul>
+              <li>
+                <span>联系人</span>
+                <input type="text" placeholder="姓名" v-model="address.name">
+              </li>
+              <li>
+                <span>电话</span>
+                <input type="text" placeholder="手机号码" maxlength="11" v-model="address.phone">
+              </li>
+              <li>
+                <span>地址</span>
+                <input type="text" placeholder="收货地址" v-model="address.adr">
+              </li>
+            </ul>
+            <div class="ok" @click="add_adr">
+              <button>确认</button>
+            </div>
+          </section>
+        </Toast_r>
+      </div>
+
     </div>
 </template>
 
@@ -111,7 +170,16 @@
         id:this.$route.query.id,
         show_remarks:false,
         remarks:"",
-        show_integral:false
+        show_integral:false,
+        show_address:false,
+        choose_index:-1,
+        show_ad:false,
+        c_adr:"",
+        address:{
+          name:"",
+          phone:"",
+          adr:""
+        }
       }
     },
     components:{
@@ -127,12 +195,49 @@
       show_i(){
         this.show_integral=true;
       },
+      show_a(){
+        this.show_address=true;
+      },
       close_i(){
         this.show_integral=false;
+      } ,
+      close_a(){
+        this.show_address=false;
+      },
+      choose_a(adr,index){
+        if (this.choose_index!==index){
+          this.c_adr=adr;
+          this.choose_index=index;
+          setTimeout(()=>{
+            this.show_address=false;
+          },400)
+        } else{
+          this.choose_index=-1;
+          this.c_adr="";
+        }
+      },
+      close_ad(){
+        this.show_ad=false;
+      } ,
+      open_ad(){
+        this.show_ad=true;
+      },
+      add_adr(){
+        var data={
+          to:"address",
+          result:this.address
+        }
+        this.$store.dispatch("update_userInfo",data);
+        this.show_ad=false;
+        this.address={
+          name:"",
+          phone:"",
+          adr:""
+        }
       }
     },
     computed:{
-      ...mapState(["cardArr",'info']),
+      ...mapState(["cardArr",'info',"user"]),
       hour(){
         var nowTime=new Date();
         var newTime=nowTime.setMinutes(nowTime.getMinutes()+this.info.deliveryTime);
@@ -141,7 +246,13 @@
       minutes(){
         var nowTime=new Date();
         var newTime=nowTime.setMinutes(nowTime.getMinutes()+this.info.deliveryTime);
-        return new Date(newTime).getMinutes();
+        if ( new Date(newTime).getMinutes()<10){
+          return "0"+new Date(newTime).getMinutes();
+        }
+        else{
+          return new Date(newTime).getMinutes();
+        }
+
       },
       thisCard(){
         var card=[];
@@ -222,7 +333,15 @@
       border-bottom: none;
     }
     a{
+      display: block;
+      width: 100%;
       color: lightcoral;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+      .p_active{
+        color: black;
+      }
     }
     i{
       margin-right: 20/@r;
@@ -449,6 +568,115 @@
         line-height: 36/@r;
         color: #666;
       }
+    }
+  }
+  .pop_r{
+    background: #eee;
+    ul{
+      background: white;
+      margin-bottom: 10/@r;
+      li{
+        position: relative;
+        width: 100%;
+        height: 80/@r;
+        padding-left: 20/@r;
+        border-bottom: 0.04rem solid #e4e4e4;
+        box-sizing: border-box;
+        .top{
+          p{
+            font-size: 16/@r;
+            font-weight: bold;
+            padding-top: 10/@r;
+            line-height: 30/@r;
+            width: 80%;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+          }
+        }
+        .bottom{
+          font-size: 14/@r;
+          color: #999;
+          p{
+            line-height: 30/@r;
+            display: inline;
+          }
+        }
+        .right{
+          position: absolute;
+          z-index: 1;
+          top: 30%;
+          right: 10/@r;
+          .icon-xuanzhong{
+              color: lightcoral;
+          }
+        }
+      }
+    }
+    .add{
+      background: white;
+      padding-left: 20/@r;
+      height: 50/@r;
+      border-bottom: 0.04rem solid #e4e4e4;
+      span{
+        font-size: 16/@r;
+        line-height: 50/@r;
+      }
+      .r{
+        float: right;
+        display: flex;
+        height: 100%;
+        padding-right: 5/@r;
+        align-items: center;
+        i{
+          color: #999;
+          padding-left: 5/@r;
+          line-height: 50/@r;
+          font-size: 12/@r;
+        }
+      }
+    }
+  }
+
+  .pop_ad{
+    background: #eee;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    ul{
+      margin-top: 10/@r;
+      width: 100%;
+      background: white;
+      li{
+        padding-left: 8/@r;
+        border-bottom: 0.04rem solid #e4e4e4;
+        box-sizing: border-box;
+        width: 100%;
+        height: 40/@r;
+        span{
+          font-weight: bold;
+          font-size: 14/@r;
+          line-height: 40/@r;
+        }
+        input{
+          float: right;
+          width: 84%;
+          height: 38/@r;
+          margin-top: 1/@r;
+          outline: none;
+          font-size: 14/@r;
+        }
+      }
+    }
+    button{
+      width: 90%;
+      margin: 15/@r auto;
+      display: block;
+      font-size: 18/@r;
+      padding: 6/@r;
+      background: lightcoral;
+      border-radius: 8/@r;
+      color: white;
     }
   }
 </style>

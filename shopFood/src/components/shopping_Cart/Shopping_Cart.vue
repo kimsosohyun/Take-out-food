@@ -80,14 +80,19 @@
         }).catch(()=>{});
       },
       goPay(){
-        if (this.money>=this.info.minPrice) {
-          this.$router.push("/pay?id="+this.id)
+        if (!this.user._id){
+          this.$router.push("/login");
+        }
+        else{
+          if (this.money>=this.info.minPrice) {
+            this.$router.push("/pay?id="+this.id)
+          }
         }
       }
 
     },
     computed:{
-      ...mapState(["cardArr","info"]),
+      ...mapState(["cardArr","info","user"]),
       thisCard(){
         var card=[];
        this.cardArr.forEach((item)=>{

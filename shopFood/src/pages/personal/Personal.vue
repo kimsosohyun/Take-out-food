@@ -4,7 +4,7 @@
     <div class="to_login">
       <router-link :to="!user._id?'/login':'/userInfo'">
         <div class="l_img">
-          <img src="//p1.meituan.net/codeman/e32b47a07b818bf9a1d4086a882c18a62282.png" alt="">
+          <img :src="avatar_url" alt="">
         </div>
         <div class="l_left">
           <h3 v-if="user._id">{{user.name||"这个人很酷名字未知！"}}</h3>
@@ -65,7 +65,7 @@
       </ul>
     </div>
 
-    <div class="fuwu">
+    <div class="fuwu" @click="to_service">
       <i class="iconfont icon-fuwu i"></i>
       <span>服务中心</span>
       <div class="c_right">
@@ -113,7 +113,14 @@
       Header,Toast_r
     },
     computed:{
-      ...mapState(["user"])
+      ...mapState(["user"]),
+      avatar_url(){
+        if (this.user.avatar){
+          return this.user.avatar;
+        } else{
+          return "//p1.meituan.net/codeman/e32b47a07b818bf9a1d4086a882c18a62282.png"
+        }
+      }
     },
     methods:{
       logout(){
@@ -131,6 +138,14 @@
       },
       close(){
         this.popupVisible=false;
+      },
+      to_service(){
+        if (this.user._id){
+          this.$router.push("/service");
+        } else{
+          this.$router.push("/login");
+        }
+
       }
     }
 

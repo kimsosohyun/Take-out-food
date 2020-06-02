@@ -18,7 +18,7 @@
 <script>
   import Vue from  "vue";
   export default {
-    name: 'Btn',
+    foodname: 'Btn',
     data(){
       return {
         id:this.$route.query.id

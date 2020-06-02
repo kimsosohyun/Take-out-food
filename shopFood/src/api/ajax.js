@@ -2,6 +2,10 @@ import  axios from "axios";
 
 export default function ajax (url,data={},method="GET") {
   var promise;
+  // return new Promise((resolve,reject)=>{
+  //
+  // })
+
 
   //console.log(JSON.stringify({})==="{}") true
   //console.log({}==={})  false
