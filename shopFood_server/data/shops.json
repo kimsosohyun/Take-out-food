@@ -3,83 +3,16 @@
     "name": "汉堡王(时尚城22605)",
     "address": "武汉市洪山区时尚城22605",
     "id": 1,
-    "latitude": 40.10039,
-    "longitude": 116.36868,
-    "location": [
-      116.36868,
-      40.10039
-    ],
-    "phone": "13437850035",
-    "category": "快餐便当/简餐",
-    "supports": [
-      {
-        "description": "已加入“外卖保”计划，食品安全有保障",
-        "icon_color": "999999",
-        "icon_name": "保",
-        "id": 7,
-        "name": "外卖保",
-        "_id": "5a5859a19c2bc57d52df30b3"
-      },
-      {
-        "description": "准时必达，超时秒赔",
-        "icon_color": "57A9FF",
-        "icon_name": "准",
-        "id": 9,
-        "name": "准时达",
-        "_id": "5a5859a19c2bc57d52df30b2"
-      },
-      {
-        "description": "该商家支持开发票，请在下单时填写好发票抬头",
-        "icon_color": "999999",
-        "icon_name": "票",
-        "id": 4,
-        "name": "开发票",
-        "_id": "5a5859a19c2bc57d52df30b1"
-      }
-    ],
-    "status": 1,
     "recent_order_num": 1106,
-    "rating_count": 2961,
     "rating": 4.7,
-    "promotion_info": "欢迎光临，用餐高峰请提前下单，谢谢",
-    "piecewise_agent_fee": {
-      "tips": "配送费约¥5"
-    },
-    "opening_hours": [
-      "8:30/20:30"
-    ],
-    "license": {
-      "catering_service_license_image": "160e91e17fa2164.png",
-      "business_license_image": "160e91e0a9f2163.png"
-    },
-    "is_new": true,
-    "is_premium": true,
     "image_path": "https://fuss10.elemecdn.com/e/17/27fa41fc2b03b1b8c2d794a5cf139jpeg.jpeg?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/",
-    "identification": {
-      "registered_number": "",
-      "registered_address": "",
-      "operation_period": "",
-      "licenses_scope": "",
-      "licenses_number": "",
-      "licenses_date": "",
-      "legal_person": "",
-      "identificate_date": null,
-      "identificate_agency": "",
-      "company_name": ""
-    },
     "float_minimum_order_amount": 20,
     "float_delivery_fee": 5,
     "distance": "1.2公里",
     "order_lead_time": "24分钟",
-    "description": "sad",
     "delivery_mode": {
-      "color": "57A9FF",
-      "id": 1,
-      "is_solid": true,
       "text": "kim专送"
-    },
-    "activities": [],
-    "__v": 0
+    }
   },
   {
     "name": "奶香铺子（软件园店）",

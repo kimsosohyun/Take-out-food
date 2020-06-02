@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-/*
+
 app.all("*", function(req, res, next) {
   if (!req.get("Origin")) return next();
   // use "*" here to accept any origin
@@ -21,7 +21,7 @@ app.all("*", function(req, res, next) {
   if ("OPTIONS" === req.method) return res.send(200);
   next();
 });
-*/
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
